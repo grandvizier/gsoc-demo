@@ -1,25 +1,20 @@
-gitCredentialId: dummyGitRepo
 artifactPublishingConfig:
     host: 192.32.52.12
     user: user53
     credentialId: dummyGitRepo
 
-
 agent: any
 
 stages:
     - name: First
-      steps:
-        - sh './scripts/hello'
+      scripts:
+        -   ./scripts/hello
     - name: Build
-      steps:
-        - stepName: sh
-          parameters:
-            script: './scripts/hello'
+      scripts:
+        -   ./scripts/build
     - name: Tests
-      steps:
-        - stepName: sh
-          defaultParameter: ./scripts/hello
+      scripts:
+        -   ./scripts/test
 
 archiveArtifacts:
     - Jenkinsfile.yaml
@@ -30,4 +25,3 @@ publishArtifacts:
       to: ~/archives
     - from: scripts/hello.sh
       to: ~/archives
-
